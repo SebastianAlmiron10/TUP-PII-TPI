@@ -1,4 +1,5 @@
 # Trabajo Práctico I - Programación
+
 from libro import *
 import os
 
@@ -29,6 +30,11 @@ def gestionar_prestamo(codigo_busqueda):
                 print('no hay unidades disponibles')      
         if not encontrado:
             print('ERROR') 
+
+
+
+
+
         
 
 def menu():
@@ -52,7 +58,7 @@ while respuesta != "salir":
             #completar
             print()
         elif int(opt) == 3:
-            #completar
+            nuevo_libro()
             print()
         elif int(opt) == 4:
             #completar
