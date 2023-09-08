@@ -6,36 +6,7 @@ import os
 
 
 print("Bienvenido!")
-respuesta = ''
-
-
-def gestionar_prestamo(codigo_busqueda):
-    
-    encontrado = False
-    for codigo in lista_libros:
-        if codigo_busqueda == codigo['cod']:
-            encontrado = True
-            
-            titulo_x = codigo['titulo']
-            autor_x = codigo['autor']
-            cant_x = codigo['cant_ej_ad']
-            
-            if cant_x > 0:
-                print(f"Titulo: {titulo_x}, Autor: {autor_x}, cantides disponibles: {cant_x}")
-                confirmado = int(input('confirmar prestamo (1. si 2. no): '))
-                if confirmado == 1:
-                    codigo['cant_ej_ad'] -= 1
-                    codigo['cant_ej_pr'] += 1
-            else:
-                print('no hay unidades disponibles')      
-        if not encontrado:
-            print('ERROR') 
-
-
-
-
-
-        
+respuesta = ''      
 
 def menu():
     print("1 - Gestionar Prestamo")
@@ -55,16 +26,16 @@ while respuesta != "salir":
             print()
         elif int(opt) == 2:
             codigo_busqueda = input('ingresar codigo de libro: ')
-            devolver_ejemplar_libro(lista_libros, codigo_busqueda)
+            devolver_ejemplar_libro(libros, codigo_busqueda)
         elif int(opt) == 3:
-            nuevo_libro()
+            registrar_nuevo_libro()
             print()
         elif int(opt) == 4:
             codigo_busqueda = input('ingresar codigo de libro: ')
-            eliminar_ejemplar_libro(lista_libros, codigo_busqueda)
+            eliminar_ejemplar_libro(libros, codigo_busqueda)
             print()
         elif int(opt) == 5:
-            ejemplares_prestados(lista_libros)
+            ejemplares_prestados(libros)
             print()
         elif int(opt) == 6:
             respuesta = "salir"

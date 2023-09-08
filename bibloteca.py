@@ -1,4 +1,5 @@
 import libro as l
+from cod_generator import generar
 
 # Crear una lista vacía para almacenar los libros
 libros = []
@@ -8,9 +9,9 @@ libros.append(l.libro1)
 libros.append(l.libro2)
 libros.append(l.libro3)
 
-def ejemplares_prestados(lista_libros):
+def ejemplares_prestados(libros):
     bandera = False
-    for libro in lista_libros:
+    for libro in libros:
         if libro['cant_ej_pr'] > 0:
             titulo_x = libro['titulo']
             autor_x = libro['autor']
@@ -27,13 +28,22 @@ def ejemplares_prestados(lista_libros):
     return None
 
 def registrar_nuevo_libro():
-    nuevo_libro = l.nuevo_libro()
-    #completar
+    
+    titulo_x = str(input("Ingrese el nombre del libro: "))
+    autor_x = str(input("Ingrese el autor del libro: "))
+    
+    cant_li = input("Ingrese las cantidades de los libros a registrar: ")
+    codigo = generar()
+    libro_nuevo = {'cod': codigo, 'cant_ej_ad': cant_li, 'cant_ej_pr': 0, "titulo": titulo_x, "autor": autor_x}
+    print(libro_nuevo)
+    libros.append(libro_nuevo)
+    
     return None
 
-def eliminar_ejemplar_libro(lista_libros, codigo_busqueda):
+
+def eliminar_ejemplar_libro(libros, codigo_busqueda):
     encontrado = False
-    for codigo in lista_libros:
+    for codigo in libros:
         if codigo_busqueda == codigo['cod']:
             encontrado = True
             cant_x = codigo['cant_ej_ad']
@@ -45,9 +55,10 @@ def eliminar_ejemplar_libro(lista_libros, codigo_busqueda):
                     print("Se Realizo la Eliminacion con Exito")
             else:
                 print('No hay Unidades')      
-        if not encontrado:
-            print('ERROR') 
+    if not encontrado:
+        print('ERROR') 
     return None
+
 
 def prestar_ejemplar_libro():
     encontrado = False
@@ -68,13 +79,14 @@ def prestar_ejemplar_libro():
                     codigo['cant_ej_pr'] += 1
             else:
                 print('no hay unidades disponibles')      
-        if not encontrado:
-            print('ERROR') 
+    if not encontrado:
+        print('ERROR') 
     return None
 
-def devolver_ejemplar_libro(lista_libros, codigo_busqueda):
+
+def devolver_ejemplar_libro(libros, codigo_busqueda):
     encontrado = False
-    for codigo in lista_libros:
+    for codigo in libros:
         if codigo_busqueda == codigo['cod']:
             encontrado = True
             cant_x = codigo['cant_ej_pr']
@@ -84,13 +96,9 @@ def devolver_ejemplar_libro(lista_libros, codigo_busqueda):
                 if confirmado == 1:
                     codigo['cant_ej_ad'] += 1
                     codigo['cant_ej_pr'] -= 1
-                    print("Se Realizo la Devolocion con Exito")
+                    print("Se Realizo la Devolucion con Exito")
             else:
                 print('No hay unidades para devolver')      
-        if not encontrado:
-            print('ERROR') 
-    return None
-
-def nuevo_libro():
-    #completar
+    if not encontrado:
+        print('ERROR') 
     return None
