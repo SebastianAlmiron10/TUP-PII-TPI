@@ -1,6 +1,5 @@
 # Trabajo Práctico I - Programación
 from bibloteca import *
-from libro import *
 import os
 
 

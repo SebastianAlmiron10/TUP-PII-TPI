@@ -1,4 +1,5 @@
 import libro as l
+import os
 from cod_generator import generar
 
 # Crear una lista vacía para almacenar los libros
@@ -31,7 +32,6 @@ def registrar_nuevo_libro():
     
     titulo_x = str(input("Ingrese el nombre del libro: "))
     autor_x = str(input("Ingrese el autor del libro: "))
-    
     cant_li = input("Ingrese las cantidades de los libros a registrar: ")
     codigo = generar()
     libro_nuevo = {'cod': codigo, 'cant_ej_ad': cant_li, 'cant_ej_pr': 0, "titulo": titulo_x, "autor": autor_x}
@@ -43,16 +43,22 @@ def registrar_nuevo_libro():
 
 def eliminar_ejemplar_libro(libros, codigo_busqueda):
     encontrado = False
+    
     for codigo in libros:
         if codigo_busqueda == codigo['cod']:
             encontrado = True
             cant_x = codigo['cant_ej_ad']
-            
+            num = False
             if cant_x > 0:
-                confirmado = int(input('Confirmar Eliminacion (1. si 2. no): '))
-                if confirmado == 1:
-                    codigo['cant_ej_ad'] -= 1
-                    print("Se Realizo la Eliminacion con Exito")
+                while not num:                   
+                    confirmado = input('Confirmar Eliminacion (1. si 2. no): ')
+                    if confirmado.isnumeric():
+                        num = True
+                        if int(confirmado) == 1:
+                            codigo['cant_ej_ad'] -= 1
+                            print("Se Realizo la Eliminacion con Exito")
+                    else: 
+                        print("Ingrese una opción numérica")
             else:
                 print('No hay Unidades')      
     if not encontrado:
@@ -66,17 +72,23 @@ def prestar_ejemplar_libro():
     for codigo in libros:
         if codigo_busqueda == codigo['cod']:
             encontrado = True
-            
+            num = False
             titulo_x = codigo['titulo']
             autor_x = codigo['autor']
             cant_x = codigo['cant_ej_ad']
             
             if cant_x > 0:
-                print(f"Titulo: {titulo_x}, Autor: {autor_x}, cantides disponibles: {cant_x}")
-                confirmado = int(input('confirmar prestamo (1. si 2. no): '))
-                if confirmado == 1:
-                    codigo['cant_ej_ad'] -= 1
-                    codigo['cant_ej_pr'] += 1
+                while not num:
+                    print(f"Titulo: {titulo_x}, Autor: {autor_x}, cantides disponibles: {cant_x}")
+                    confirmado = input('confirmar prestamo (1. si 2. no): ')
+                    if confirmado.isnumeric():
+                        num = True
+                        if int(confirmado) == 1:
+                            codigo['cant_ej_ad'] -= 1
+                            codigo['cant_ej_pr'] += 1
+                            print("Se Realizo el prestamo con Exito")
+                    else: 
+                        print("Ingrese una opción numérica")
             else:
                 print('no hay unidades disponibles')      
     if not encontrado:
@@ -86,17 +98,23 @@ def prestar_ejemplar_libro():
 
 def devolver_ejemplar_libro(libros, codigo_busqueda):
     encontrado = False
+    num = False
     for codigo in libros:
         if codigo_busqueda == codigo['cod']:
             encontrado = True
             cant_x = codigo['cant_ej_pr']
             
             if cant_x > 0:
-                confirmado = int(input('confirmar devolucion (1. si 2. no): '))
-                if confirmado == 1:
-                    codigo['cant_ej_ad'] += 1
-                    codigo['cant_ej_pr'] -= 1
-                    print("Se Realizo la Devolucion con Exito")
+                while not num:
+                    confirmado = input('confirmar devolucion (1. si 2. no): ')
+                    if confirmado.isnumeric():
+                        num = True
+                        if int(confirmado) == 1:
+                            codigo['cant_ej_ad'] += 1
+                            codigo['cant_ej_pr'] -= 1
+                            print("Se Realizo la Devolucion con Exito")
+                    else: 
+                        print("Ingrese una opción numérica")
             else:
                 print('No hay unidades para devolver')      
     if not encontrado:
