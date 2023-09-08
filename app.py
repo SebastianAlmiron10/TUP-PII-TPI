@@ -1,5 +1,5 @@
 # Trabajo Práctico I - Programación
-
+from bibloteca import *
 from libro import *
 import os
 
@@ -42,7 +42,7 @@ def menu():
     print("2 - Gestionar Devolucion")
     print("3 - Registrar nuevo libro")
     print("4 - Elimiar ejemplar")
-    print("5 - Mostrar ejemplares perstados")
+    print("5 - Mostrar ejemplares prestados")
     print("6 - Salir")
 
 while respuesta != "salir":
@@ -51,20 +51,20 @@ while respuesta != "salir":
     os.system ("cls") #Limpiar pantalla
     if opt.isnumeric():
         if int(opt) == 1:
-            codigo_busqueda = input('ingresar codigo de libro: ')
-            gestionar_prestamo(codigo_busqueda)
+            prestar_ejemplar_libro()
             print()
         elif int(opt) == 2:
-            #completar
-            print()
+            codigo_busqueda = input('ingresar codigo de libro: ')
+            devolver_ejemplar_libro(lista_libros, codigo_busqueda)
         elif int(opt) == 3:
             nuevo_libro()
             print()
         elif int(opt) == 4:
-            #completar
+            codigo_busqueda = input('ingresar codigo de libro: ')
+            eliminar_ejemplar_libro(lista_libros, codigo_busqueda)
             print()
         elif int(opt) == 5:
-            #completar
+            ejemplares_prestados(lista_libros)
             print()
         elif int(opt) == 6:
             respuesta = "salir"
